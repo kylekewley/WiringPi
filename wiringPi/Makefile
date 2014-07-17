@@ -27,6 +27,7 @@ DYN_VERS_MIN=0
 VERSION=$(DYN_VERS_MAJ).$(DYN_VERS_MIN)
 DESTDIR=/usr
 PREFIX=/local
+SUFFIX=/WiringPi
 
 STATIC=libwiringPi.a
 DYNAMIC=libwiringPi.so.$(VERSION)
@@ -90,18 +91,18 @@ tags:	$(SRC)
 install:	$(DYNAMIC)
 	@echo "[Install]"
 	@install -m 0755 -d			$(DESTDIR)$(PREFIX)/lib
-	@install -m 0755 -d			$(DESTDIR)$(PREFIX)/include
-	@install -m 0644 wiringPi.h		$(DESTDIR)$(PREFIX)/include
-	@install -m 0644 wiringSerial.h		$(DESTDIR)$(PREFIX)/include
-	@install -m 0644 wiringShift.h		$(DESTDIR)$(PREFIX)/include
-	@install -m 0644 gertboard.h		$(DESTDIR)$(PREFIX)/include
-	@install -m 0644 piNes.h		$(DESTDIR)$(PREFIX)/include
-	@install -m 0644 softPwm.h		$(DESTDIR)$(PREFIX)/include
-	@install -m 0644 softServo.h		$(DESTDIR)$(PREFIX)/include
-	@install -m 0644 softTone.h		$(DESTDIR)$(PREFIX)/include
-	@install -m 0644 lcd.h			$(DESTDIR)$(PREFIX)/include
-	@install -m 0644 wiringPiSPI.h		$(DESTDIR)$(PREFIX)/include
-	@install -m 0644 wiringPiI2C.h		$(DESTDIR)$(PREFIX)/include
+	@install -m 0755 -d			$(DESTDIR)$(PREFIX)/include$(SUFFIX)
+	@install -m 0644 wiringPi.h		$(DESTDIR)$(PREFIX)/include$(SUFFIX)
+	@install -m 0644 wiringSerial.h		$(DESTDIR)$(PREFIX)/include$(SUFFIX)
+	@install -m 0644 wiringShift.h		$(DESTDIR)$(PREFIX)/include$(SUFFIX)
+	@install -m 0644 gertboard.h		$(DESTDIR)$(PREFIX)/include$(SUFFIX)
+	@install -m 0644 piNes.h		$(DESTDIR)$(PREFIX)/include$(SUFFIX)
+	@install -m 0644 softPwm.h		$(DESTDIR)$(PREFIX)/include$(SUFFIX)
+	@install -m 0644 softServo.h		$(DESTDIR)$(PREFIX)/include$(SUFFIX)
+	@install -m 0644 softTone.h		$(DESTDIR)$(PREFIX)/include$(SUFFIX)
+	@install -m 0644 lcd.h			$(DESTDIR)$(PREFIX)/include$(SUFFIX)
+	@install -m 0644 wiringPiSPI.h		$(DESTDIR)$(PREFIX)/include$(SUFFIX)
+	@install -m 0644 wiringPiI2C.h		$(DESTDIR)$(PREFIX)/include$(SUFFIX)
 	@install -m 0755 libwiringPi.so.$(VERSION)		  $(DESTDIR)$(PREFIX)/lib
 	@ln -sf $(DESTDIR)$(PREFIX)/lib/libwiringPi.so.$(VERSION) $(DESTDIR)/lib/libwiringPi.so
 	@ln -sf $(DESTDIR)$(PREFIX)/lib/libwiringPi.so.$(VERSION) $(DESTDIR)/lib/libwiringPi.so.1
@@ -115,17 +116,17 @@ install-static:	$(STATIC)
 .PHONEY:	uninstall
 uninstall:
 	@echo "[UnInstall]"
-	@rm -f $(DESTDIR)$(PREFIX)/include/wiringPi.h
-	@rm -f $(DESTDIR)$(PREFIX)/include/wiringSerial.h
-	@rm -f $(DESTDIR)$(PREFIX)/include/wiringShift.h
-	@rm -f $(DESTDIR)$(PREFIX)/include/gertboard.h
-	@rm -f $(DESTDIR)$(PREFIX)/include/piNes.h
-	@rm -f $(DESTDIR)$(PREFIX)/include/softPwm.h
-	@rm -f $(DESTDIR)$(PREFIX)/include/softServo.h
-	@rm -f $(DESTDIR)$(PREFIX)/include/softTone.h
-	@rm -f $(DESTDIR)$(PREFIX)/include/lcd.h
-	@rm -f $(DESTDIR)$(PREFIX)/include/wiringPiSPI.h
-	@rm -f $(DESTDIR)$(PREFIX)/include/wiringPiI2C.h
+	@rm -f $(DESTDIR)$(PREFIX)/include$(SUFFIX)/wiringPi.h
+	@rm -f $(DESTDIR)$(PREFIX)/include$(SUFFIX)/wiringSerial.h
+	@rm -f $(DESTDIR)$(PREFIX)/include$(SUFFIX)/wiringShift.h
+	@rm -f $(DESTDIR)$(PREFIX)/include$(SUFFIX)/gertboard.h
+	@rm -f $(DESTDIR)$(PREFIX)/include$(SUFFIX)/piNes.h
+	@rm -f $(DESTDIR)$(PREFIX)/include$(SUFFIX)/softPwm.h
+	@rm -f $(DESTDIR)$(PREFIX)/include$(SUFFIX)/softServo.h
+	@rm -f $(DESTDIR)$(PREFIX)/include$(SUFFIX)/softTone.h
+	@rm -f $(DESTDIR)$(PREFIX)/include$(SUFFIX)/lcd.h
+	@rm -f $(DESTDIR)$(PREFIX)/include$(SUFFIX)/wiringPiSPI.h
+	@rm -f $(DESTDIR)$(PREFIX)/include$(SUFFIX)/wiringPiI2C.h
 	@rm -f $(DESTDIR)$(PREFIX)/lib/libwiringPi.*
 	@ldconfig
 
