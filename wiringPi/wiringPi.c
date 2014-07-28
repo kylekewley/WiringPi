@@ -214,7 +214,9 @@ static int sysFds [64] ;
 
 // ISR Data
 
-static void (*isrFunctions [64])(int) ;
+static void (*isrFunctions [64])(int, void*) ;
+
+static void *isrPointers[64];
 
 
 // Doing it the Arduino way with lookup tables...
@@ -1064,7 +1066,7 @@ static void *interruptHandler (void *arg)
 
   for (;;)
     if (waitForInterruptSys (myPin, -1) > 0)
-      isrFunctions [myPin] (myPin) ;
+      isrFunctions [myPin] (myPin, isrPointers[myPin]) ;
 
   return NULL ;
 }
@@ -1077,7 +1079,7 @@ static void *interruptHandler (void *arg)
  *********************************************************************************
  */
 
-int wiringPiISR (int pin, int mode, void (*function)(int))
+int wiringPiISR (int pin, int mode, void* ptr, void (*function)(int, void*))
 {
   pthread_t threadId ;
   char fName   [64] ;
@@ -1140,6 +1142,7 @@ int wiringPiISR (int pin, int mode, void (*function)(int))
     read (sysFds [pin], &c, 1) ;
 
   isrFunctions [pin] = function ;
+  isrPointers[pin] = ptr;
 
   pthread_create (&threadId, NULL, interruptHandler, &pin) ;
 
